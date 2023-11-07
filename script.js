@@ -10,7 +10,7 @@
   <title>toggle</title>
   <meta name="description" content="wwl.js example" />
   <meta name="author" content="cyrus@freshman.dev">
-  <link rel="icon" href="https://freshman.dev/raw/wwl/icon-js.png">
+  <link rel="icon" href="/lib/2/wwl/icon.png">
 </head>
 <body>
   <script src="/lib/2/wwl/script.js"></script>
@@ -114,16 +114,13 @@ SOFTWARE.
   })()
   log(api.endpoint, location.href)
   /*
-
   [== SESSIONS ==]
-  GET /id  unique identifier for client (IPv6)
-  POST /common-state: store mutable JSON object
+  GET /id: unique identifier for client (IPv6)
+  POST /state: store mutable JSON object
     id: unique identifier e.g. session-1234
     update?: mutation (this implementation uses MongoDB syntax) e.g. { $set: { abc: 123 } }
     poll?: wait for next update
-  
   */
-
   const sync = {
     instances:{},
     get values() { return Object.fromEntries(Object.entries(sync.instances).map(([k,v]) => [k, v.value])) },
@@ -192,7 +189,6 @@ SOFTWARE.
     },
 
   }
-
   const session = sync.new(Promise.resolve(
     location.port 
     ? (() => {
