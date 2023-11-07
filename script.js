@@ -58,13 +58,12 @@ SOFTWARE.
 
 // WARNING // I still need to clean this up.
 
-if (!window['wwl.js']) (_=>{
-  window['wwl.js'] = Date.now()
+if (!window['wwl.js']) (_=>{window['wwl.js']=Date.now()
 
   // dependencies
   Object.entries({
-    'common.js': '/lib/2/common.js',
-  }).map(([key,src])=>!window[key]&&document.head.append((x=>Object.assign(x,{innerHTML:(src=>(x=>{x.withCredentials=false;x.open('GET',src,false);x.send();return x.responseText})(new XMLHttpRequest()))(new URL(src,location.port?location.origin:'https://freshman.dev').toString())}))(document.createElement('script'))))  
+    'common.js': '/lib/2/common/script.js',
+  }).map(([key,src])=>!window[key]&&document.head.append((x=>Object.assign(x,{innerHTML:(src=>(x=>{x.withCredentials=false;x.open('GET',src,false);x.send();return x.responseText})(new XMLHttpRequest()))(new URL(src,location.port==='3030'/*local testing on port 3030*/?location.origin:'https://freshman.dev').toString())}))(document.createElement('script'))))  
 
   const log = named_log('wwl.js')
 
@@ -219,12 +218,12 @@ if (!window['wwl.js']) (_=>{
       xhr.send()
       document.head.append((x => Object.assign(x, { innerHTML:xhr.responseText }))(document.createElement('script')))
     })(new XMLHttpRequest())),
-    attach: (definition) => {
+    attach: (definition={}) => {
       let {
         dependencies=[],
         at='html', hash=true, to=document.querySelector(at),
         postrender=()=>{}, 
-        state=undefined, states=undefined, handle={}, prefix=undefined, init=undefined,
+        state=undefined, states=[' '], handle={}, prefix=undefined, init=undefined,
         title=document.title, subtitle=document.querySelector('[name=description]')?.content, footer=undefined,
         name=title||document.title, author=document.querySelector('[name=author]')?.content, icon=document.querySelector('[rel=icon]')?.href, theme='#e6dfdc',
         data,
@@ -593,7 +592,7 @@ if (!window['wwl.js']) (_=>{
   ${icon || name || author ? '<br/>' : ''}
   <span style="flex-grow: 1"></span>
   <span><a href="sms:?&body=https://basin.fish">text</a> or <a href="${app_install}">install</a> to view on watch</span>
-  <span>built with <a href='/lib/2/wwl.js'>wwl.js</a> - <a href='https://freshman.dev/raw/wwl/app'>gallery</span>
+  <span>built with <a href='/lib/2/wwl/script.js'>wwl.js</a> - <a href='https://freshman.dev/raw/wwl/app'>gallery</span>
 </div>`}<div class=wwl-app-root style="${defaults.style||''};"></div></${body_tag}>
 `
 
