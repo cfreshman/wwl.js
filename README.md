@@ -29,3 +29,5 @@ Example: (view at https://raw.tu.fo/wwl/app/example)
   </script>
 </body>
 ```
+
+![](image.png)
