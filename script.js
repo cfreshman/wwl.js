@@ -10,10 +10,10 @@
   <title>toggle</title>
   <meta name="description" content="wwl.js example" />
   <meta name="author" content="cyrus@freshman.dev">
-  <link rel="icon" href="../icon-js.png">
+  <link rel="icon" href="https://freshman.dev/raw/wwl/icon-js.png">
 </head>
 <body>
-  <script src="../wwl.js"></script>
+  <script src="/lib/2/wwl/script.js"></script>
   <script>
     wwl.attach({
       state: 0,
