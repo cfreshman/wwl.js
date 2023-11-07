@@ -1,9 +1,9 @@
-// wwl.js (web-watch-library)
-// Some might consider this a framework, but WWF is taken
-// v0.0.7
+// wwl.js (web-watch-library)  
+// Some might consider this a framework, but WWF is taken  
+// v0.0.7  
 
-// Interactive builder: https://wwl-builder.tu.fo
-// Gallery: https://raw.tu.fo/wwl/app/gallery
+// Interactive builder: https://wwl-builder.tu.fo  
+// Gallery: https://raw.tu.fo/wwl/app/gallery  
 /* Example: (view at https://raw.tu.fo/wwl/app/example)
 
 <head>
