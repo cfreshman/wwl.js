@@ -58,12 +58,14 @@ SOFTWARE.
 
 // WARNING // I still need to clean this up.
 
-// dependencies
-;[
-  '/lib/2/common.js',
-].map(src=>document.head.append((x=>Object.assign(x,{innerHTML:(src=>(x=>{x.withCredentials=false;x.open('GET',src,false);x.send();return x.responseText})(new XMLHttpRequest()))(new URL(src,location.port?location.origin:'https://freshman.dev').toString())}))(document.createElement('script'))))
+if (!window['wwl.js']) (_=>{
+  window['wwl.js'] = Date.now()
 
-;(_=>{
+  // dependencies
+  Object.entries({
+    'common.js': '/lib/2/common.js',
+  }).map(([key,src])=>!window[key]&&document.head.append((x=>Object.assign(x,{innerHTML:(src=>(x=>{x.withCredentials=false;x.open('GET',src,false);x.send();return x.responseText})(new XMLHttpRequest()))(new URL(src,location.port?location.origin:'https://freshman.dev').toString())}))(document.createElement('script'))))  
+
   const log = named_log('wwl.js')
 
   // mini state utilities
