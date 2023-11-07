@@ -58,53 +58,13 @@ SOFTWARE.
 
 // WARNING // I still need to clean this up.
 
-(_=>{
-  const compose = (...fs) => (...xs) => fs.slice(1).reduce((x, f) => f(x), fs[0] && fs[0](...xs))
-  const pipe = (x, ...fs) => compose(...fs)(x)
-  const fs = (x) => ({ // syntax similar to |> JS proposal
-    pipe: (f) => fs(f(x)),
-    with: (f) => f(x),
-    value: x,
-  })
+// dependencies
+;[
+  '/lib/2/common.js',
+].map(src=>document.head.append((x=>Object.assign(x,{innerHTML:(src=>(x=>{x.withCredentials=false;x.open('GET',src,false);x.send();return x.responseText})(new XMLHttpRequest()))(new URL(src,location.port?location.origin:'https://freshman.dev').toString())}))(document.createElement('script'))))
 
-  Promise.prototype.with = function(f) { return this.then(async x => { await f(x); return x }) }
-  const log = (...x) => console[x[0].includes('error') ? 'error' : 'debug']('[wwl]', ...x)
-  const node = (x='<div></div>') => (y => {
-    y.innerHTML = x
-    return y.children[0]
-  })(document.createElement('div'))
-  const css = (x, cssText) => Object.assign(x.style, Object.fromEntries(cssText.split(/[;\n]/).filter(x=>x).map(l => l.split(':').map(x=>x.trim()))))
-  const defer = (f=()=>{}, ms=0) => new Promise(r => setTimeout(async _=> r(f?.apply ? f() : f), ms))
-  class ActionablePromise extends Promise {
-    constructor(executor=()=>{}) {
-      let resolve, reject
-      super((_resolve, _reject) => {
-        resolve = _resolve
-        reject = _reject
-        executor(resolve, reject)
-      })
-      this.resolve = resolve
-      this.reject = reject
-    }
-  }
-
-  const transmute = (o, f) => Object.assign({}, ...Object.keys(o).map(k => (typeof(o[k]) === 'object' && !Array.isArray(o[k])) ? { [k]: transmute(o[k], f) } : f(k, o[k])))
-  const merge = (...os) => {
-    const result = {}
-    os.map(o => {
-      Object.keys(o).map(k => {
-        if (o[k] === undefined) delete result[k]
-        else result[k] = (typeof(result[k]) === 'object' && typeof(o[k]) === 'object' && !Array.isArray(o[k])) ? merge(result[k], o[k]) : o[k]
-      })
-    })
-    return result
-  }
-  const deletion = (o={}) => transmute(o, (k,v)=> v === undefined ? { [k]: true } : {})
-
-  const range = n => Array.from({ length:n }).map((_,i) => i)
-  const tokens = '0123456789abcdef'.toUpperCase() // only use hex to avoid similar characters
-  const pick = a => a[Math.floor(Math.random()*a.length)]
-  const alphanum = n => range(n).map(_=>pick(tokens)).join('')
+;(_=>{
+  const log = named_log('wwl.js')
 
   // mini state utilities
   // used to maintain session (since Apple Watch doesn't store cookies right now)
@@ -289,7 +249,7 @@ SOFTWARE.
         "></div>`)
         document.body.append(to)
       }
-      const app_session = wwl.attached.length && is_mock ? sync.new('session-mock-'+alphanum(8)) : session
+      const app_session = wwl.attached.length && is_mock ? sync.new('session-mock-'+rand.alphanum(8)) : session
 
       // replace attach point HTML with wwl skeleton
       const at_L = to || document.querySelector(at)
@@ -639,7 +599,7 @@ SOFTWARE.
 </div>`}<div class=wwl-app-root style="${defaults.style||''};"></div></${body_tag}>
 `
 
-      at_L.dataset['wwl_app_id'] = alphanum(4)
+      at_L.dataset['wwl_app_id'] = rand.alphanum(4)
       document.title = name || document.title
       if (icon) (document.querySelector('[rel=icon]') || (x => {
         document.head.append(x)
