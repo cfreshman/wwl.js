@@ -4,8 +4,8 @@ v0.0.7
 
 Interactive builder: https://wwl-builder.tu.fo  
 Gallery: https://raw.tu.fo/wwl/app/gallery  
-Example: (view at https://raw.tu.fo/wwl/app/example)  
 
+Example: (view at https://raw.tu.fo/wwl/app/example)  
 ```
 <head>
   <title>toggle</title>
@@ -30,4 +30,4 @@ Example: (view at https://raw.tu.fo/wwl/app/example)
 </body>
 ```
 
-![](image.png)
+<img src="image.png" width="250px" />
