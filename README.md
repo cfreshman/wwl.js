@@ -30,4 +30,4 @@ Example: (view at https://raw.tu.fo/wwl/app/example)
 </body>
 ```
 
-<img src="image.png" width="250px" /> &nbsp; <img src="tappy.png" width="250px" />
+<img src="toggle.png" width="250px" /> &nbsp; <img src="image.png" width="250px" /> &nbsp; <img src="tappy.png" width="250px" />
