@@ -1,10 +1,10 @@
-// wwl.js (web-watch-library)  
+// wwl.js (web-watch-library) @ https://freshman.dev/lib/2/wwl/script.js  
 // Some might consider this a framework, but WWF is taken  
 // v0.0.7  
 
-// Interactive builder: https://wwl-builder.tu.fo  
-// Gallery: https://raw.tu.fo/wwl/app/gallery  
-/* Example: (view at https://raw.tu.fo/wwl/app/example)
+// Interactive builder: https://freshman.dev/wwl-builder  
+// Gallery: https://freshman.dev/raw/wwl/app/gallery  
+/* Example: (view at https://freshman.dev/raw/wwl/app/example)
 
 <head>
   <title>toggle</title>
@@ -1148,7 +1148,7 @@ position: relative;
           const outer = x.getBoundingClientRect()
           x.style.height = x.style.width = 'fit-content'
 
-          css(x, `
+          style(x, `
           word-break: keep-all;
           display: inline-flex; align-items: center; justify-content: center;
           flex-direction: row; flex-wrap: wrap;
