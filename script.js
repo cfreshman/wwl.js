@@ -495,11 +495,26 @@ if (!window['wwl.js']) (_=>{window['wwl.js']=Date.now()
     font-size: 1em;
     pointer-events: all;
   }
-  .wwl-mock .wwl-about .wwl-app-icon {
+  .wwl-mock .wwl-about .wwl-app-tile {
     height: 0;
     flex-grow: 1e6;
+    aspect-ratio: 1/1;
     cursor: pointer;
     pointer-events: none;
+    image-rendering: pixelated;
+  }
+  .wwl-mock .wwl-about .wwl-app-icon {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+  }
+  .wwl-mock .wwl-about .wwl-app-text-icon {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid #fff;
   }
 
   .wwl-mock .wwl-body {
@@ -586,13 +601,24 @@ if (!window['wwl.js']) (_=>{window['wwl.js']=Date.now()
 <div class=wwl-about>
   <br/><br/><br/><br/>
   <span style="flex-grow: 1"></span>
-  ${icon ? `<img src="${icon}" class=wwl-app-icon />` : ''}
-  ${name && !icon ? `<span style="font-size:2em;line-height:1.5">${name.toUpperCase()}</span>` : ''}
+  <div class=wwl-app-tile style="position:relative">
+    ${
+      icon
+      ? `
+      <img class=wwl-app-icon src="${icon}" />
+      <span style="
+      position: absolute;
+      bottom: 0; right: 0; margin: 2px; color: #fff; background: #222;
+      ">${name}</span>
+      `
+      : `<span class=wwl-app-text-icon style="font-size:2em;line-height:1.5">${name.toUpperCase()}</span>`
+    }
+  </div>
   ${author ? `<span>by ${author.replace(/([^@]+@)([^@]+)/, `<a href="mailto:${author}">$1</a>(<a href="http://$2">$2</a>)`)}</span>` : ''}
   ${icon || name || author ? '<br/>' : ''}
   <span style="flex-grow: 1"></span>
   <span><a href="sms:?&body=https://basin.fish">text</a> or <a href="${app_install}">install</a> to view on watch</span>
-  <span>built with <a href='/lib/2/wwl/script.js'>wwl.js</a> - <a href='https://freshman.dev/raw/wwl/app'>gallery</span>
+  <span>built with <a href='/lib/2/wwl/script.js'>wwl.js</a> - <a href='/raw/wwl/app'>gallery</span>
 </div>`}<div class=wwl-app-root style="${defaults.style||''};"></div></${body_tag}>
 `
 
