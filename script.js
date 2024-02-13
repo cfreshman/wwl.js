@@ -214,7 +214,8 @@ if (!window['wwl.js']) (_=>{window['wwl.js']=Date.now()
       return top === window && physical.width < 400 && Math.abs(1 - (innerWidth / innerHeight)) < .25
     },
     dependencies: (list) => list.map(src => (xhr => {
-      xhr.open('GET', src, false)
+      xhr.withCredentials = false
+      xhr.open('GET', new URL(src, location.port==='3030'/*local testing on port 3030*/?location.origin:'https://freshman.dev').toString(), false)
       xhr.send()
       document.head.append((x => Object.assign(x, { innerHTML:xhr.responseText }))(document.createElement('script')))
     })(new XMLHttpRequest())),
@@ -222,7 +223,7 @@ if (!window['wwl.js']) (_=>{window['wwl.js']=Date.now()
       let {
         dependencies=[],
         at='html', hash=true, to=document.querySelector(at),
-        postrender=()=>{}, 
+        postrender=()=>{},
         state=undefined, states=[' '], handle={}, prefix=undefined, init=undefined,
         title=document.title, subtitle=document.querySelector('[name=description]')?.content, footer=undefined,
         name=title||document.title, author=document.querySelector('[name=author]')?.content, icon=document.querySelector('[rel=icon]')?.href, theme='#e6dfdc',
